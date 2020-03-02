@@ -13,6 +13,7 @@ namespace WindowsFormsApp1
         private string Nome;
         private int idade;
         private int id;
+        private int teste;
         public Pessoa(int id,string nome, int idade)
         {
             this.Nome = nome;
