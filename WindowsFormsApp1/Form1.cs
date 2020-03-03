@@ -30,6 +30,8 @@ namespace WindowsFormsApp1
             label5.Text = "";
             label6.BackColor = System.Drawing.Color.Blue;
             label6.ForeColor = System.Drawing.Color.Blue;
+            label7.BackColor = System.Drawing.Color.Blue;
+            label7.ForeColor = System.Drawing.Color.Blue;
 
         }
 
@@ -201,12 +203,6 @@ namespace WindowsFormsApp1
                         Command.CommandText = "SELECT * FROM pessoa WHERE id_pessoa = (SELECT MAX(id_pessoa) FROM pessoa)";
 
 
-
-                // Command.Parameters.Add("@nome", MySqlDbType.Text).Value = textBox1.Text;
-                //Command.Parameters.Add("@idade", MySqlDbType.Int32).Value = Convert.ToInt32(textBox2.Text);
-                //Command.Parameters.Add("@id", MySqlDbType.Int32).Value= 
-
-                // Command.CommandText = "INSERT INTO pessoa(id_pessoa, nome, idade) Values(102,@nome,@idade)";
                 Command.Connection = connection;
 
                 //  connection.Open();Convert.ToInt32(textBox2.Text)
@@ -223,6 +219,27 @@ namespace WindowsFormsApp1
 
 
         }
+        public void Dados()
+        {
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=;database=pessoasc#");
+            connection.Open();
+
+            if (connection.State == ConnectionState.Open)
+            {
+                button4.BackColor = Color.Green;
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * from pessoa", connection);
+                //connection.Open();
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "pessoa");
+                dataGridView1.DataSource = ds.Tables["pessoa"];
+
+            }
+            else
+                button4.BackColor = Color.Red;
+
+
+        }
+
         public void mysqlligar(String l3,String l4)
         {
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=;database=pessoasc#");
@@ -275,6 +292,16 @@ namespace WindowsFormsApp1
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Dados();
         }
     }
 }
